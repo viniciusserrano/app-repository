@@ -41,7 +41,7 @@ api-imobiliaria
 │       ├── service   # Regras de negócio
 │       └── resource  # Endpoints REST
 └── local             # Configurações locais (exemplo: Docker)
-
+```
 ---
 
 ## ⚙️ Configuração e Execução
