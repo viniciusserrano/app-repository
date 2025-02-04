@@ -26,22 +26,6 @@ API para gerenciamento e integração de dados do setor imobiliário, construíd
 - **Filtragem Avançada**:
   - Busca imóveis com base em parâmetros como bairro, cidade, e tipo de segmento.
 
-
-
-⚙️ Configuração e Execução
-Pré-requisitos
-Java 21 ou superior.
-Docker e Docker Compose.
-Maven 3.8.x.
-
-📜 Licença
-Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
-
-✨ Autor
-Vinicius Gomes Serrano Segalio - Desenvolvedor Java.
-LinkedIn: [Seu LinkedIn](https://www.linkedin.com/in/viniciusgserrano/)
-GitHub: [Seu GitHub](https://viniciusserrano.github.io/)
-
 ---
 
 ## 📂 Estrutura do Projeto
@@ -58,8 +42,19 @@ api-imobiliaria
 │       └── resource  # Endpoints REST
 └── local             # Configurações locais (exemplo: Docker)
 
+---
 
 
+⚙️ Configuração e Execução
+Pré-requisitos
+Java 21 ou superior.
+Docker e Docker Compose.
+Maven 3.8.x.
 
+📜 Licença
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
 
-
+✨ Autor
+Vinicius Gomes Serrano Segalio - Desenvolvedor Java.
+LinkedIn: [Vinicius Serrano](https://www.linkedin.com/in/viniciusgserrano/)
+GitHub: [GitHub](https://viniciusserrano.github.io/)
