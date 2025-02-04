@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./api-imobiliaria
+      dockerfile: Dockerfile
+    container_name: api-imobiliaria
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      # Variável de ambiente para a conexão com o MongoDB (exemplo para Spring Boot)
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/db
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-imobiliaria
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
