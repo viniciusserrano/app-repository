@@ -12,7 +12,7 @@ services:
       - mongo
     environment:
       # Variável de ambiente para a conexão com o MongoDB (exemplo para Spring Boot)
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/db
+      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
 
   mongo:
     image: mongo:latest
