@@ -44,8 +44,7 @@ api-imobiliaria
 
 ---
 
-
-⚙️ Configuração e Execução
+## ⚙️ Configuração e Execução
 Pré-requisitos
 Java 21 ou superior.
 Docker e Docker Compose.
