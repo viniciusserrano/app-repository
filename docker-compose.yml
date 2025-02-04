@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  app:
+  spring-app:
     build:
       context: ./api-imobiliaria
       dockerfile: Dockerfile
