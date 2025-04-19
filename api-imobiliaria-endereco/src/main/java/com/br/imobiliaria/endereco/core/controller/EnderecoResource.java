@@ -2,7 +2,6 @@ package com.br.imobiliaria.endereco.core.controller;
 
 import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponseDto;
 import com.br.imobiliaria.endereco.core.service.EnderecoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
