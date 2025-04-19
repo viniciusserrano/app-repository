@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/api-imobiliaria/pom.xml" />
+        <option value="$PROJECT_DIR$/api-imobiliaria-endereco/pom.xml" />
       </list>
     </option>
   </component>

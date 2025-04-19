@@ -1,14 +1,27 @@
 version: '3.8'
 
 services:
-  spring-app:
+  api-imobiliaria:
     build:
       context: ./api-imobiliaria
       dockerfile: Dockerfile
     image: api-imobiliaria:latest
     container_name: api-imobiliaria
     ports:
-      - "8080:8080"
+      - "8089:8089"
+    depends_on:
+      - mongo
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/imobiliaria
+
+  api-imobiliaria-endereco:
+    build:
+      context: ./api-imobiliaria-endereco
+      dockerfile: Dockerfile
+    image: api-imobiliaria-endereco:latest
+    container_name: api-imobiliaria-endereco
+    ports:
+      - "8088:8088"
     depends_on:
       - mongo
     environment:
