@@ -1,26 +1,30 @@
-# Etapa de build: utiliza openjdk:21-slim e instala o Maven
-FROM openjdk:21-slim AS build
-
-# Atualiza os pacotes e instala o Maven (a versão instalada pode não ser a mais nova,
-# mas normalmente é suficiente para compilar seu projeto)
-RUN apt-get update && apt-get install -y maven
+# 📦 Etapa 1: Build com Maven
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-# Copia o arquivo de configuração do Maven e o código-fonte
+# Copia apenas o POM primeiro para aproveitar cache de dependências
 COPY pom.xml .
+
+# Baixa dependências sem compilar (melhora cache)
+RUN mvn dependency:go-offline -B
+
+# Agora copia o código-fonte
 COPY src ./src
 
-# Compila a aplicação e gera o JAR
+# Compila o projeto (sem testes)
 RUN mvn clean package -DskipTests
 
-# Etapa de runtime: utiliza uma imagem mais leve do OpenJDK 21
-FROM openjdk:21-slim
+# 🏃 Etapa 2: Imagem final mais leve
+FROM eclipse-temurin:21-jdk-jammy
+
 WORKDIR /app
 
-# Copia o JAR gerado na etapa de build para o container.
-# Certifique-se de que o nome "api-imobiliaria-0.0.1-SNAPSHOT.jar" corresponde ao gerado.
+# Copia apenas o JAR final da etapa anterior
 COPY --from=build /app/target/api-imobiliaria-0.0.1-SNAPSHOT.jar app.jar
 
+# Porta padrão
 EXPOSE 8080
+
+# Executa o JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]

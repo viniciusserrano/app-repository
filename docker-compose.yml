@@ -5,14 +5,14 @@ services:
     build:
       context: ./api-imobiliaria
       dockerfile: Dockerfile
+    image: api-imobiliaria:latest
     container_name: api-imobiliaria
     ports:
       - "8080:8080"
     depends_on:
       - mongo
     environment:
-      # Variável de ambiente para a conexão com o MongoDB (exemplo para Spring Boot)
-      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/imobiliaria
 
   mongo:
     image: mongo:latest
