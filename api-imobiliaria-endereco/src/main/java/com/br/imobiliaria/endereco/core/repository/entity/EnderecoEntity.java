@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "enderecos")
+@CompoundIndex(name = "idx_regiao_bairro_logradouro", def = "{'regiao':1,'bairro':1,'logradouro':1}", unique = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnderecoEntity {
 
