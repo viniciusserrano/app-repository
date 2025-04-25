@@ -11,14 +11,20 @@ import java.util.stream.Collectors;
 @Component
 public class EnderecoConverter {
 
-    public EnderecoResponseDto paraDto(EnderecoEntity entity) {
-        return new EnderecoResponseDto(
-                entity.getCidade(),
-                entity.getBairro(),
-                entity.getZona(),
-                entity.getRegiao(),
-                entity.getIsAtivo(),
-                entity.getLocation() != null ? entity.getLocation().getCoordinates() : null
-        );
+    public EnderecoResponseDto toDto(EnderecoEntity e) {
+        return EnderecoResponseDto.builder()
+                .id(e.getId())
+                .uf(e.getUf())
+                .cidade(e.getCidade())
+                .zona(e.getZona())
+                .regiao(e.getRegiao())
+                .bairro(e.getBairro())
+                .logradouro(e.getLogradouro())
+                .cep(e.getCep())
+                .isAtivo(e.getIsAtivo())
+                .observacaoRegiao(e.getObservacaoRegiao())
+                .coordenadas(e.getLocation().getCoordinates())
+                .build();
     }
+
 }

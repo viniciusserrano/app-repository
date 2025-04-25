@@ -38,4 +38,13 @@ public class EnderecoResource {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/por-regiao")
+    public ResponseEntity<Page<EnderecoResponseDto>> buscarPorRegiao(
+            @RequestParam String regiao,
+            Pageable pageable) {
+
+        Page<EnderecoResponseDto> page = enderecoService.buscarPorRegiao(regiao, pageable);
+        return ResponseEntity.ok(page);
+    }
+
 }
