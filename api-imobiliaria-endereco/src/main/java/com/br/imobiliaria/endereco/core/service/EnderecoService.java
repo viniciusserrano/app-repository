@@ -4,6 +4,8 @@ import com.br.imobiliaria.endereco.core.repository.dao.EnderecoDao;
 import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponseDto;
 import com.br.imobiliaria.endereco.core.service.converter.EnderecoConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +22,9 @@ public class EnderecoService {
         this.converter = converter;
     }
 
-    public List<EnderecoResponseDto> buscarTodos() {
-        return enderecoDao.findAll()
-                .stream()
-                .map(converter::paraDto)
-                .collect(Collectors.toList());
+    public Page<EnderecoResponseDto> buscarTodosPaginado(Pageable pageable) {
+        return enderecoDao.findAll(pageable)
+                .map(converter::paraDto);
     }
+
 }
