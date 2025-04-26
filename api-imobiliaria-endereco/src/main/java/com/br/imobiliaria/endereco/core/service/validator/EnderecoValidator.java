@@ -15,4 +15,13 @@ public class EnderecoValidator {
             );
         }
     }
+
+    public void validarLogradouroNaoNuloOuVazio(String logradouro) {
+        if (StringUtils.isBlank(logradouro)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Parâmetro 'logradouro' é obrigatório e não pode estar em branco."
+            );
+        }
+    }
 }

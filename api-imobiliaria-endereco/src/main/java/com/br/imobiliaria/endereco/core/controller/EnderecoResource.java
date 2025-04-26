@@ -1,6 +1,7 @@
 package com.br.imobiliaria.endereco.core.controller;
 
 import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponseDto;
+import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponsePorRuaDto;
 import com.br.imobiliaria.endereco.core.repository.dto.PopularEnderecoRequest;
 import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
 import com.br.imobiliaria.endereco.core.service.EnderecoPopulacaoService;
@@ -44,6 +45,15 @@ public class EnderecoResource {
             Pageable pageable) {
 
         Page<EnderecoResponseDto> page = enderecoService.buscarPorRegiao(regiao, pageable);
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/por-rua")
+    public ResponseEntity<Page<EnderecoResponsePorRuaDto>> buscarPorLogradouro(
+            @RequestParam String logradouro,
+            Pageable pageable) {
+        Page<EnderecoResponsePorRuaDto> page = enderecoService
+                .buscarPorLogradouro(logradouro, pageable);
         return ResponseEntity.ok(page);
     }
 

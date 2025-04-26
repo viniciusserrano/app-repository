@@ -19,4 +19,7 @@ public interface EnderecoDao extends MongoRepository<EnderecoEntity, String> {
     Page<EnderecoEntity>findByRegiao(String regiao, Pageable pageable);
 
     List<EnderecoEntity> findAllByRegiao(String regiao);
+
+    Page<EnderecoEntity> findByLogradouroContainingIgnoreCase(String logradouro, Pageable pageable);
+    Page<EnderecoEntity> findByRegiaoContainingIgnoreCase(String regiao, Pageable pageable);
 }

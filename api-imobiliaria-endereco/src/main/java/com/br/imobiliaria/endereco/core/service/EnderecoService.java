@@ -2,11 +2,13 @@ package com.br.imobiliaria.endereco.core.service;
 
 import com.br.imobiliaria.endereco.core.repository.dao.EnderecoDao;
 import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponseDto;
+import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponsePorRuaDto;
 import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
 import com.br.imobiliaria.endereco.core.service.converter.EnderecoConverter;
 import com.br.imobiliaria.endereco.core.service.validator.EnderecoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,19 @@ public class EnderecoService {
         validator.validarRegiaoNaoNulaOuVazia(regiao);
         Page<EnderecoEntity> entidades = enderecoDao.findByRegiao(regiao, pageable);
         return entidades.map(converter::toDto);
+    }
+
+    public Page<EnderecoResponsePorRuaDto> buscarPorLogradouro(String logradouro, Pageable pageable) {
+        validator.validarLogradouroNaoNuloOuVazio(logradouro);
+
+        Page<EnderecoEntity> entidades = enderecoDao
+                .findByLogradouroContainingIgnoreCase(logradouro, pageable);
+
+        List<EnderecoResponsePorRuaDto> dtos = entidades.stream()
+                .map(converter::converterParaPorRuaDto)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(dtos, pageable, entidades.getTotalElements());
     }
 
 }
