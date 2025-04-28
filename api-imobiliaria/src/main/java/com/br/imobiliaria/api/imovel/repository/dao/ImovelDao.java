@@ -2,11 +2,17 @@ package com.br.imobiliaria.api.imovel.repository.dao;
 
 import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-@Component
+import java.util.Optional;
+@Repository
 public interface ImovelDao extends MongoRepository<ImovelEntity, String> {
-    List<ImovelEntity> findBySegmentoVendaOrSegmentoLocacao(Integer segmentoVenda, Integer segmentoLocacao);
+
+    // Lista todos para podermos inspecionar
+    List<ImovelEntity> findAll();
+
+    Optional<ImovelEntity> findByIdImovel(Long idImovel);
+
 }

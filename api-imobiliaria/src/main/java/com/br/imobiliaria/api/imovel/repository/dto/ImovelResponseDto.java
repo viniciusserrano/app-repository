@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImovelResponseDto {
-    private Integer idImovel;
+    private Long idImovel;
     private String tipoImovel;
     private String subTipoImovel;
     private String cidade;

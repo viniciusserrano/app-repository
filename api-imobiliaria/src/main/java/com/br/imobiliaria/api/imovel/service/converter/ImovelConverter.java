@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 public class ImovelConverter {
     public ImovelResponseDto paraDto(ImovelEntity entity) {
-        String cidade = entity.getEndereco() != null ? entity.getEndereco().getCidade() : null;
-        String bairro = entity.getEndereco() != null ? entity.getEndereco().getBairro() : null;
+        String cidade = null;
+        String bairro = null;
 
         return new ImovelResponseDto(
                 entity.getIdImovel(),
@@ -17,7 +17,7 @@ public class ImovelConverter {
                 entity.getSubTipoImovel(),
                 cidade,
                 bairro,
-                entity.getValorVenda(),
+                entity.getValorLocacao(),
                 entity.getEnderecoFotoPrincipal(),
                 entity.getQuantidadeDormitorios(),
                 entity.getQuantidadeBanheiros(),
