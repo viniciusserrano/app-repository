@@ -31,6 +31,9 @@ public class Endereco {
     @Field("enderecoSemAcento")
     private EnderecoSemAcento enderecoSemAcento;
 
+    @Field("location")
+    private Location location;
+
     @Data
     @NoArgsConstructor
     public static class EnderecoSemAcento {

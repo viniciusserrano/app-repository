@@ -14,6 +14,17 @@ public class EnderecoPorRuaConverter {
         endereco.setBairro(dto.getBairro());
         endereco.setLogradouro(dto.getLogradouro());
         endereco.setCep(dto.getCep());
+        endereco.setLocation(paraLocation(dto.getLocation()));
+
+        // *** Mapeando o enderecoSemAcento ***
+        Endereco.EnderecoSemAcento sem = new Endereco.EnderecoSemAcento();
+        sem.setLogradouro(dto.getEnderecoSemAcento().getLogradouro());
+        sem.setBairro(dto.getEnderecoSemAcento().getBairro());
+        sem.setCidade(dto.getEnderecoSemAcento().getCidade());
+        sem.setUf(dto.getEnderecoSemAcento().getZona());
+        sem.setCep(dto.getCep());
+        endereco.setEnderecoSemAcento(sem);
+
         return endereco;
     }
 

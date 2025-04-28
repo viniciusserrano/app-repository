@@ -5,6 +5,7 @@ import com.br.imobiliaria.api.imovel.repository.dao.ImovelDao;
 import com.br.imobiliaria.api.imovel.repository.dto.EnderecoPorRuaDto;
 import com.br.imobiliaria.api.imovel.repository.dto.ImovelResponseDto;
 import com.br.imobiliaria.api.imovel.repository.dto.PageResponse;
+import com.br.imobiliaria.api.imovel.repository.entity.Endereco;
 import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
 import com.br.imobiliaria.api.imovel.service.converter.EnderecoPorRuaConverter;
 import com.br.imobiliaria.api.imovel.service.converter.ImovelConverter;
@@ -62,25 +63,25 @@ public class ImovelService {
 
 
     public void associarEnderecoPorLogradouro(Long idImovel, String logradouro) {
-        // 1) Chama a API de Endereços via Feign
+        // 1. Busca o DTO de endereço via Feign
         PageResponse<EnderecoPorRuaDto> resposta =
                 enderecoClient.buscarPorRua(logradouro, 0, 1);
         enderecoFeignValidator.validarConteudo(resposta);
         EnderecoPorRuaDto dto = resposta.getContent().get(0);
 
-        // 2) Prepara o update diretamente pelo campo "idImovel"
-        Query filtro = Query.query(Criteria.where("idImovel").is(idImovel));
-        Update atualizacao = new Update()
-                .set("endereco", enderecoPorRuaConverter.paraEndereco(dto))
-                .set("location", enderecoPorRuaConverter.paraLocation(dto.getLocation()));
+        // 2. Converte o DTO para o objeto Endereco
+        Endereco endereco = enderecoPorRuaConverter.paraEndereco(dto);
 
-        // 3) Executa o update no MongoDB
-        var result = mongoTemplate.updateFirst(filtro, atualizacao, ImovelEntity.class);
-        if (result.getMatchedCount() == 0) {
+        // 3. Executa o update via método customizado do DAO
+        long matched = imovelDao.updateEnderecoByIdImovel(idImovel, endereco);
+        if (matched == 0) {
             throw new RuntimeException("Não existe imóvel com idImovel=" + idImovel);
         }
 
-        System.out.println(">>> Endereço associado via updateFirst para idImovel=" + idImovel);
+        // 4. Log de confirmação
+        System.out.println(
+                ">>> Endereço associado via ImovelDao.updateEnderecoByIdImovel para idImovel="
+                        + idImovel);
     }
 
 
