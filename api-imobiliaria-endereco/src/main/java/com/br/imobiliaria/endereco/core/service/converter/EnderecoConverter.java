@@ -7,10 +7,17 @@ import com.br.imobiliaria.endereco.core.repository.dto.LocationDto;
 import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
+
 @Component
 public class EnderecoConverter {
 
     public EnderecoResponseDto toDto(EnderecoEntity e) {
+        List<Double> coords = Optional.ofNullable(e.getLocation())
+                .map(EnderecoEntity.EnderecoLocation::getCoordinates)
+                .orElse(null); // ou Collections.emptyList()
+
         return EnderecoResponseDto.builder()
                 .id(e.getId())
                 .uf(e.getUf())
@@ -22,9 +29,10 @@ public class EnderecoConverter {
                 .cep(e.getCep())
                 .isAtivo(e.getIsAtivo())
                 .observacaoRegiao(e.getObservacaoRegiao())
-                .coordenadas(e.getLocation().getCoordinates())
+                .coordenadas(coords)
                 .build();
     }
+
 
     public EnderecoResponsePorRuaDto converterParaPorRuaDto(EnderecoEntity ent) {
         return new EnderecoResponsePorRuaDto(

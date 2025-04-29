@@ -10,13 +10,13 @@ scrape_configs:
   - job_name: 'api-imobiliaria'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['api-imobiliaria:8080']
+      - targets: ['api-imobiliaria-endereco.onrender.com','api-imobiliaria:8080']
 
   # Seu serviço de endereços
   - job_name: 'api-imobiliaria-endereco'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['api-imobiliaria-endereco:8088']
+      - targets: ['api-imobiliaria-endereco.onrender.com','api-imobiliaria-endereco:8088']
 
   # Prometheus scrapping itself (útil para saber saúde, GC, etc)
   - job_name: 'prometheus'
