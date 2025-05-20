@@ -1,24 +1,36 @@
-# prometheus.yml
-
-# 1) Definimos o intervalo de coleta e avaliação
 global:
-  scrape_interval:     15s  # com que frequência o Prometheus "scrapa" todo mundo
-  evaluation_interval: 15s  # com que frequência avalia regras de gravação, alertas, etc.
+  scrape_interval:     15s       # intervalos de coleta
+  evaluation_interval: 15s       # intervalos de avaliação de regras
 
 scrape_configs:
-  # Seu serviço de imóveis
   - job_name: 'api-imobiliaria'
-    metrics_path: '/actuator/prometheus'
+    metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ['api-imobiliaria-endereco.onrender.com','api-imobiliaria:8080']
+      - targets: ['api-imobiliaria:8080']
 
-  # Seu serviço de endereços
   - job_name: 'api-imobiliaria-endereco'
-    metrics_path: '/actuator/prometheus'
+    metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ['api-imobiliaria-endereco.onrender.com','api-imobiliaria-endereco:8088']
+      - targets: ['api-imobiliaria-endereco:8088']
 
-  # Prometheus scrapping itself (útil para saber saúde, GC, etc)
-  - job_name: 'prometheus'
+  - job_name: 'api-imobiliaria-remoto'
+    scheme: https
+    metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ['prometheus:9090']
+      - targets: ['app-imobiliaria.onrender.com']
+
+  - job_name: 'api-imobiliaria-endereco-remoto'
+    scheme: https
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['api-imobiliaria-endereco.onrender.com']
+
+  - job_name: 'prometheus'            # opcional: monitora o próprio Prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+
+remote_write:
+  - url: "${GRAFANA_CLOUD_URL}"
+    basic_auth:
+      username: "${GRAFANA_CLOUD_USERNAME}"
+      password: "${GRAFANA_CLOUD_API_KEY}"
