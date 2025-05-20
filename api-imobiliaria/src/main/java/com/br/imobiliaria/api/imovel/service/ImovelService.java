@@ -10,6 +10,8 @@ import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
 import com.br.imobiliaria.api.imovel.service.converter.EnderecoPorRuaConverter;
 import com.br.imobiliaria.api.imovel.service.converter.ImovelConverter;
 import com.br.imobiliaria.api.imovel.service.validator.EnderecoFeignValidator;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -30,12 +32,14 @@ public class ImovelService {
     private final EnderecoPorRuaConverter enderecoPorRuaConverter;
 //    private final ImovelCriteriaRepository imovelCriteria;
 
+    private final MeterRegistry meterRegistry;
+
     private final MongoTemplate mongoTemplate;
 
     public ImovelService(ImovelDao imovelDao, ImovelConverter imovelConverter,
                          EnderecoClient enderecoClient, EnderecoFeignValidator enderecoFeignValidator,
                          EnderecoPorRuaConverter enderecoPorRuaConverter,
-                         MongoTemplate mongoTemplate) {
+                         MongoTemplate mongoTemplate, MeterRegistry meterRegistry) {
         this.imovelDao = imovelDao;
         this.imovelConverter = imovelConverter;
         this.enderecoClient = enderecoClient;
@@ -43,6 +47,7 @@ public class ImovelService {
         this.enderecoPorRuaConverter = enderecoPorRuaConverter;
 //        this.imovelCriteria = imovelCriteria;
         this.mongoTemplate = mongoTemplate;
+        this.meterRegistry = meterRegistry;
     }
 
     public Page<ImovelResponseDto> buscarTodos(Pageable pageable) {
@@ -63,26 +68,32 @@ public class ImovelService {
 
 
     public void associarEnderecoPorLogradouro(Long idImovel, String logradouro) {
+        // Inicia amostragem do timer
+        Timer.Sample sample = Timer.start(meterRegistry);
+
         // 1. Busca o DTO de endereço via Feign
         PageResponse<EnderecoPorRuaDto> resposta =
                 enderecoClient.buscarPorRua(logradouro, 0, 1);
+
+        // Para o timer, nome da métrica e tags
+        sample.stop(meterRegistry.timer(
+                "imobiliaria.feign.buscarPorRua.seconds",           // nome da métrica
+                "client", "api-endereco",                          // tag client
+                "method", "buscarPorRua"                           // tag method
+        ));
+
         enderecoFeignValidator.validarConteudo(resposta);
         EnderecoPorRuaDto dto = resposta.getContent().get(0);
 
-        // 2. Converte o DTO para o objeto Endereco
         Endereco endereco = enderecoPorRuaConverter.paraEndereco(dto);
-
-        // 3. Executa o update via método customizado do DAO
         long matched = imovelDao.updateEnderecoByIdImovel(idImovel, endereco);
         if (matched == 0) {
             throw new RuntimeException("Não existe imóvel com idImovel=" + idImovel);
         }
-
-        // 4. Log de confirmação
         System.out.println(
-                ">>> Endereço associado via ImovelDao.updateEnderecoByIdImovel para idImovel="
-                        + idImovel);
+                ">>> Endereço associado via ImovelDao.updateEnderecoByIdImovel para idImovel=" + idImovel);
     }
+
 
 
 }
