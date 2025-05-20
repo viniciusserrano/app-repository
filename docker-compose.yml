@@ -13,6 +13,7 @@ services:
       - mongo
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/imobiliaria
+      ENDERECO_SERVICE_URL: "https://api-imobiliaria-endereco.onrender.com"
 
   api-imobiliaria-endereco:
     build:
