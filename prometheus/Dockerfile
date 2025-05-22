@@ -1,28 +1,18 @@
-# ── Etapa 1: gera o prometheus.yml com envsubst ───────────────────
-FROM alpine:3.18 AS renderer
+FROM prom/prometheus:latest AS prometheus
 
-# instala apenas o gettext (que contém envsubst)
+# (suas etapas de cópia do prometheus.yml.tpl e do binário aqui...)
+
+FROM alpine:3.18
 RUN apk add --no-cache gettext
+COPY --from=prometheus /bin/prometheus /bin/prometheus
+COPY prometheus.yml.tpl /etc/prometheus/prometheus.yml.tpl
 
-# traz só o tpl
-WORKDIR /etc/prometheus
-COPY prometheus.yml.tpl .
-
-# substitui variáveis de ambiente no template e gera o arquivo final
-RUN envsubst < prometheus.yml.tpl > prometheus.yml
-
-# ── Etapa 2: imagem oficial do Prometheus ─────────────────────────
-FROM prom/prometheus:latest
-
-# copia o prometheus.yml já processado
-COPY --from=renderer /etc/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
-
-# expõe a porta (opcional, pois a imagem já expõe 9090)
 EXPOSE 9090
 
-# (a imagem oficial já tem ENTRYPOINT=/bin/prometheus e CMD="--config.file=..."),
-# mas, caso queira, você pode explicitar:
-# ENTRYPOINT [ "/bin/prometheus" ]
-# CMD [ "--config.file=/etc/prometheus/prometheus.yml",
-#       "--storage.tsdb.path=/prometheus",
-#       "--web.listen-address=:9090" ]
+ENTRYPOINT ["/bin/sh","-c", "\
+    echo '=== gerando /etc/prometheus/prometheus.yml ==='; \
+    envsubst < /etc/prometheus/prometheus.yml.tpl > /etc/prometheus/prometheus.yml; \
+    head -n 20 /etc/prometheus/prometheus.yml; \
+    echo '============================================'; \
+    exec /bin/prometheus --config.file=/etc/prometheus/prometheus.yml \
+"]
