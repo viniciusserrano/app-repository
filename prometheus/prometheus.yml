@@ -1,36 +1,36 @@
-global:
-  scrape_interval:     15s       # intervalos de coleta
-  evaluation_interval: 15s       # intervalos de avaliação de regras
-
-scrape_configs:
-  - job_name: 'api-imobiliaria'
-    metrics_path: /actuator/prometheus
-    static_configs:
-      - targets: ['api-imobiliaria:8080']
-
-  - job_name: 'api-imobiliaria-endereco'
-    metrics_path: /actuator/prometheus
-    static_configs:
-      - targets: ['api-imobiliaria-endereco:8088']
-
-  - job_name: 'api-imobiliaria-remoto'
-    scheme: https
-    metrics_path: /actuator/prometheus
-    static_configs:
-      - targets: ['app-imobiliaria.onrender.com']
-
-  - job_name: 'api-imobiliaria-endereco-remoto'
-    scheme: https
-    metrics_path: /actuator/prometheus
-    static_configs:
-      - targets: ['api-imobiliaria-endereco.onrender.com']
-
-  - job_name: 'prometheus'            # opcional: monitora o próprio Prometheus
-    static_configs:
-      - targets: ['localhost:9090']
-
-remote_write:
-  - url: https://prometheus-prod-40-prod-sa-east-1.grafana.net/api/prom/push
-    basic_auth:
-      username: "2409559"
-      password: "${GRAFANA_CLOUD_API_KEY}"
+#global:
+#  scrape_interval:     15s       # intervalos de coleta
+#  evaluation_interval: 15s       # intervalos de avaliação de regras
+#
+#scrape_configs:
+#  - job_name: 'api-imobiliaria'
+#    metrics_path: /actuator/prometheus
+#    static_configs:
+#      - targets: ['api-imobiliaria:8080']
+#
+#  - job_name: 'api-imobiliaria-endereco'
+#    metrics_path: /actuator/prometheus
+#    static_configs:
+#      - targets: ['api-imobiliaria-endereco:8088']
+#
+#  - job_name: 'api-imobiliaria-remoto'
+#    scheme: https
+#    metrics_path: /actuator/prometheus
+#    static_configs:
+#      - targets: ['app-imobiliaria.onrender.com']
+#
+#  - job_name: 'api-imobiliaria-endereco-remoto'
+#    scheme: https
+#    metrics_path: /actuator/prometheus
+#    static_configs:
+#      - targets: ['api-imobiliaria-endereco.onrender.com']
+#
+#  - job_name: 'prometheus'            # opcional: monitora o próprio Prometheus
+#    static_configs:
+#      - targets: ['localhost:9090']
+#
+#remote_write:
+#  - url: https://prometheus-prod-40-prod-sa-east-1.grafana.net/api/prom/push
+#    basic_auth:
+#      username: "2409559"
+#      password: "${GRAFANA_CLOUD_API_KEY}"
