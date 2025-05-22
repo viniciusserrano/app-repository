@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Gera o arquivo de config final, injetando a senha via envsubst
+# gera o prometheus.yml final, injetando $GRAFANA_REMOTE_WRITE_PASSWORD
 envsubst < /etc/prometheus/prometheus.yml.tpl > /etc/prometheus/prometheus.yml
-# Executa o Prometheus com todos os argumentos da linha de comando
+# executa o Prometheus com todos os flags do CMD
 exec /bin/prometheus "$@"
