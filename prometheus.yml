@@ -30,7 +30,7 @@ scrape_configs:
       - targets: ['localhost:9090']
 
 remote_write:
-  - url: "${GRAFANA_CLOUD_URL}"
+  - url: https://prometheus-prod-40-prod-sa-east-1.grafana.net/api/prom/push
     basic_auth:
-      username: "${GRAFANA_CLOUD_USERNAME}"
+      username: "2409559"
       password: "${GRAFANA_CLOUD_API_KEY}"
