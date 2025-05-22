@@ -33,4 +33,4 @@ remote_write:
   - url: https://prometheus-prod-40-prod-sa-east-1.grafana.net/api/prom/push
     basic_auth:
       username: "2409559"
-      password: "${GRAFANA_CLOUD_API_KEY}"
+      password: "${GRAFANA_REMOTE_WRITE_PASSWORD}"
