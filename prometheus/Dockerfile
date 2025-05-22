@@ -10,9 +10,7 @@ COPY prometheus.yml.tpl /etc/prometheus/prometheus.yml.tpl
 EXPOSE 9090
 
 ENTRYPOINT ["/bin/sh","-c", "\
-    echo '=== gerando /etc/prometheus/prometheus.yml ==='; \
-    envsubst < /etc/prometheus/prometheus.yml.tpl > /etc/prometheus/prometheus.yml; \
-    head -n 20 /etc/prometheus/prometheus.yml; \
-    echo '============================================'; \
-    exec /bin/prometheus --config.file=/etc/prometheus/prometheus.yml \
+  envsubst < /etc/prometheus/prometheus.yml.tpl > /etc/prometheus/prometheus.yml && \
+  echo '--- BEGIN CONFIG ---'; cat /etc/prometheus/prometheus.yml; echo '--- END CONFIG ---'; \
+  exec /bin/prometheus --config.file=/etc/prometheus/prometheus.yml \
 "]
