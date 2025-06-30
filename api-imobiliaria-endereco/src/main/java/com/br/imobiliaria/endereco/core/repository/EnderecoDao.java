@@ -1,6 +1,6 @@
-package com.br.imobiliaria.endereco.core.repository.dao;
+package com.br.imobiliaria.endereco.core.repository;
 
-import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
+import com.br.imobiliaria.endereco.core.model.EnderecoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;

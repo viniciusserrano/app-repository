@@ -1,4 +1,4 @@
-package com.br.imobiliaria.endereco.core.repository.entity;
+package com.br.imobiliaria.endereco.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

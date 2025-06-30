@@ -1,19 +1,15 @@
 package com.br.imobiliaria.endereco.core.service;
 
-import com.br.imobiliaria.endereco.core.repository.dao.EnderecoDao;
-import com.br.imobiliaria.endereco.core.repository.dto.PopularEnderecoRequest;
-import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
+import com.br.imobiliaria.endereco.core.repository.EnderecoDao;
+import com.br.imobiliaria.endereco.core.model.EnderecoEntity;
 import com.br.imobiliaria.endereco.overpass.repository.dto.StreetDto;
 import com.br.imobiliaria.endereco.overpass.service.OverpassService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EnderecoPopulacaoService {

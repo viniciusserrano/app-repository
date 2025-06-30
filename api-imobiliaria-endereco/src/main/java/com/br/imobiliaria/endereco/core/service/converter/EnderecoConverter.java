@@ -1,10 +1,10 @@
 package com.br.imobiliaria.endereco.core.service.converter;
 
-import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponseDto;
-import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponsePorRuaDto;
-import com.br.imobiliaria.endereco.core.repository.dto.EnderecoSemAcentoDto;
-import com.br.imobiliaria.endereco.core.repository.dto.LocationDto;
-import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
+import com.br.imobiliaria.endereco.core.dto.EnderecoResponseDto;
+import com.br.imobiliaria.endereco.core.dto.EnderecoResponsePorRuaDto;
+import com.br.imobiliaria.endereco.core.dto.EnderecoSemAcentoDto;
+import com.br.imobiliaria.endereco.core.dto.LocationDto;
+import com.br.imobiliaria.endereco.core.model.EnderecoEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

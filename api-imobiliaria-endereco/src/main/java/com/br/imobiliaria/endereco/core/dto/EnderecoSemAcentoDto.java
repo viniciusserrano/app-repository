@@ -1,4 +1,4 @@
-package com.br.imobiliaria.endereco.core.repository.dto;
+package com.br.imobiliaria.endereco.core.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

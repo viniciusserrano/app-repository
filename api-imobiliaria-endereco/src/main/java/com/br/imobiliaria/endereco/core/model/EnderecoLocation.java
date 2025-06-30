@@ -1,4 +1,4 @@
-package com.br.imobiliaria.endereco.core.repository.dto;
+package com.br.imobiliaria.endereco.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LocationDto {
+public class EnderecoLocation {
+
     private String type;
     private List<Double> coordinates;
 }

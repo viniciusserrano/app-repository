@@ -1,17 +1,14 @@
 package com.br.imobiliaria.endereco.core.controller;
 
-import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponseDto;
-import com.br.imobiliaria.endereco.core.repository.dto.EnderecoResponsePorRuaDto;
-import com.br.imobiliaria.endereco.core.repository.dto.PopularEnderecoRequest;
-import com.br.imobiliaria.endereco.core.repository.entity.EnderecoEntity;
+import com.br.imobiliaria.endereco.core.dto.EnderecoResponseDto;
+import com.br.imobiliaria.endereco.core.dto.EnderecoResponsePorRuaDto;
+import com.br.imobiliaria.endereco.core.model.EnderecoEntity;
 import com.br.imobiliaria.endereco.core.service.EnderecoPopulacaoService;
 import com.br.imobiliaria.endereco.core.service.EnderecoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/enderecos")
