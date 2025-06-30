@@ -1,8 +1,8 @@
 package com.br.imobiliaria.api.imovel.service.converter;
 
-import com.br.imobiliaria.api.imovel.repository.dto.EnderecoPorRuaDto;
-import com.br.imobiliaria.api.imovel.repository.entity.Endereco;
-import com.br.imobiliaria.api.imovel.repository.entity.Location;
+import com.br.imobiliaria.api.imovel.dto.EnderecoPorRuaDto;
+import com.br.imobiliaria.api.imovel.model.Endereco;
+import com.br.imobiliaria.api.imovel.model.Location;
 import org.springframework.stereotype.Component;
 
 @Component

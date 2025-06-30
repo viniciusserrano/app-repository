@@ -1,6 +1,6 @@
-package com.br.imobiliaria.api.imovel.repository.dao;
+package com.br.imobiliaria.api.imovel.repository;
 
-import com.br.imobiliaria.api.imovel.repository.entity.Endereco;
+import com.br.imobiliaria.api.imovel.model.Endereco;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,13 +1,14 @@
-package com.br.imobiliaria.api.imovel.repository.entity;
+package com.br.imobiliaria.api.imovel.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Field;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 @Data
-public class LocationEntity {
-    @Field("type")
+@AllArgsConstructor
+@NoArgsConstructor
+public class LocationDto {
     private String type; // Tipo de localização, ex.: "Point"
-    @Field("coordinates")
     private List<Double> coordinates; // Coordenadas: [longitude, latitude]
 }

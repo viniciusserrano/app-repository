@@ -1,4 +1,4 @@
-package com.br.imobiliaria.api.imovel.repository.dto;
+package com.br.imobiliaria.api.imovel.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

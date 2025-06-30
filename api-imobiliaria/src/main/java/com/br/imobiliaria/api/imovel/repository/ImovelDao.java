@@ -1,9 +1,8 @@
-package com.br.imobiliaria.api.imovel.repository.dao;
+package com.br.imobiliaria.api.imovel.repository;
 
-import com.br.imobiliaria.api.imovel.repository.entity.Endereco;
-import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
+import com.br.imobiliaria.api.imovel.model.Endereco;
+import com.br.imobiliaria.api.imovel.model.ImovelEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.br.imobiliaria.api.feign;
 
-import com.br.imobiliaria.api.imovel.repository.dto.EnderecoPorRuaDto;
-import com.br.imobiliaria.api.imovel.repository.dto.PageResponse;
+import com.br.imobiliaria.api.imovel.dto.EnderecoPorRuaDto;
+import com.br.imobiliaria.api.imovel.dto.PageResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

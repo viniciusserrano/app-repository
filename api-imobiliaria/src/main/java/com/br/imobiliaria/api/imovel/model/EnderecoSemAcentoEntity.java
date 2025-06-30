@@ -1,4 +1,4 @@
-package com.br.imobiliaria.api.imovel.repository.entity;
+package com.br.imobiliaria.api.imovel.model;
 
 import lombok.Data;
 

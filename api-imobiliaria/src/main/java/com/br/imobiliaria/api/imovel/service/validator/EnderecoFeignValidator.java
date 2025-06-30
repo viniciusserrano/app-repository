@@ -1,6 +1,6 @@
 package com.br.imobiliaria.api.imovel.service.validator;
 
-import com.br.imobiliaria.api.imovel.repository.dto.PageResponse;
+import com.br.imobiliaria.api.imovel.dto.PageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;

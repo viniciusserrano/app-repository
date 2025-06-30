@@ -1,6 +1,6 @@
 package com.br.imobiliaria.api.mongoconfig;
 
-import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
+import com.br.imobiliaria.api.imovel.model.ImovelEntity;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;

@@ -1,12 +1,12 @@
 package com.br.imobiliaria.api.imovel.service;
 
 import com.br.imobiliaria.api.feign.EnderecoClient;
-import com.br.imobiliaria.api.imovel.repository.dao.ImovelDao;
-import com.br.imobiliaria.api.imovel.repository.dto.EnderecoPorRuaDto;
-import com.br.imobiliaria.api.imovel.repository.dto.ImovelResponseDto;
-import com.br.imobiliaria.api.imovel.repository.dto.PageResponse;
-import com.br.imobiliaria.api.imovel.repository.entity.Endereco;
-import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
+import com.br.imobiliaria.api.imovel.repository.ImovelDao;
+import com.br.imobiliaria.api.imovel.dto.EnderecoPorRuaDto;
+import com.br.imobiliaria.api.imovel.dto.ImovelResponseDto;
+import com.br.imobiliaria.api.imovel.dto.PageResponse;
+import com.br.imobiliaria.api.imovel.model.Endereco;
+import com.br.imobiliaria.api.imovel.model.ImovelEntity;
 import com.br.imobiliaria.api.imovel.service.converter.EnderecoPorRuaConverter;
 import com.br.imobiliaria.api.imovel.service.converter.ImovelConverter;
 import com.br.imobiliaria.api.imovel.service.validator.EnderecoFeignValidator;
@@ -15,9 +15,6 @@ import io.micrometer.core.instrument.Timer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

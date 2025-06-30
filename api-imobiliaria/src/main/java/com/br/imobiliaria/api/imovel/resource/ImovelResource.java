@@ -1,7 +1,7 @@
 package com.br.imobiliaria.api.imovel.resource;
 
-import com.br.imobiliaria.api.imovel.repository.dto.ImovelResponseDto;
-import com.br.imobiliaria.api.imovel.repository.entity.ImovelEntity;
+import com.br.imobiliaria.api.imovel.dto.ImovelResponseDto;
+import com.br.imobiliaria.api.imovel.model.ImovelEntity;
 import com.br.imobiliaria.api.imovel.service.ImovelService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

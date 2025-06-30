@@ -1,6 +1,6 @@
 package com.br.imobiliaria.api.endereco.repository.dto;
 
-import com.br.imobiliaria.api.imovel.repository.dto.LocationDto;
+import com.br.imobiliaria.api.imovel.dto.LocationDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
